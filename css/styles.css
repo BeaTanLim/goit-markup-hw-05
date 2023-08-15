@@ -112,6 +112,7 @@ img{
   display: block;
   padding-top: 32px;
   padding-bottom: 31px;
+  transition: color 250ms ease-in-out;
 }
 
 .nav-menu{
@@ -137,27 +138,46 @@ img{
 }
 
 
-/* I am not sure how to do this with ::after */
-.nav-menu .current{
-  border-bottom: 4px solid var(--iriscolor);
-  border-radius: 2px;
-  margin-bottom: -1px;
+.page{
+  position: relative;
 }
 
-.nav-menu .page{
-  transition: border-bottom 250ms cubic-bezier(0.4, 0, 0.2, 1);
+/* Underline under the menu items */
+
+.page::after{
+  content: "";
+  border-radius: 2px;
+  height: 4px;
+  width: 0;
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  transition: width 250ms ease-in-out, background-color 250ms ease-in-out;
 }
 
-.nav-menu .page:hover{
-  border-bottom: 4px solid var(--iriscolor);
+.page.current::after{
+  content: "";
   border-radius: 2px;
-  margin-bottom: -1px;
+  height: 4px;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  background-color: var(--oceancolor);
 }
+
+.page:hover::after,
+.page:focus::after{
+  width: 100%;
+  border: 2px solid var(--oceancolor);
+  background-color: var(--oceancolor);
+}
+
+/*  */
 
 .page-header{
   border-bottom: 1px solid var(--cornflower);
 }
-
 
 .nav-menu .page:hover,
 .nav-menu .page:focus,
@@ -221,6 +241,7 @@ img{
   letter-spacing: 0.03em;
   border-radius: 4px;
   border-color: transparent;
+  transition: background-color 250ms ease-in-out, box-shadow 250ms ease-in-out;
 }
 
 .button.primary{
@@ -384,6 +405,7 @@ alpha = opacity*/
   align-items: center;
   justify-content: center;
   border-radius: 50%;
+  transition: background-color 250ms ease-in-out;
 }
 
 .team-social .link:hover,
@@ -487,6 +509,7 @@ alpha = opacity*/
   border-radius: 50%;
   background-color: var(--iriscolor);
   color: var(--cloud);
+  transition: background-color 250ms ease-in-out;
 }
 
 .social-footer .link:hover,
@@ -613,7 +636,6 @@ The adjacent sibling selector is used to select an element that is directly afte
 
 .project-overlay-text{
   background-color: var(--iriscolor);
-  opacity: 0.9;
   position: absolute;
   top: 0;
   padding: 40px 32px;
@@ -633,7 +655,7 @@ The adjacent sibling selector is used to select an element that is directly afte
 
 /* I add this to move the blue box to the bottom of the thumbnail. Since I am using overflow:hidden to the thumbnail, this project-overlay-text will also be hidden (kinda). It's still there, but we need to find a way to make it move upwards when we hovwe on the thumbnail*/
 .project-overlay-text{
-  transform: translateY(100%);
+  transform: translateY(101%);
   transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -694,6 +716,11 @@ The adjacent sibling selector is used to select an element that is directly afte
   right: 24px;
   width: 24px;
   height: 24px;
+
+  /* para gumitna yung X */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   background-color: var(--cornflower);
   border-radius: 50%;
